@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">MyFirstApplication</string>
     <string name="hello_world">Hello world</string>
+    <string name="hello_world_java">Hello World!by java</string>
+    <string name="hello_android">你好Android</string>
 </resources>
