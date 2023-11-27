@@ -1,6 +1,7 @@
 package com.jnu.student;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,34 +14,34 @@ public class BookDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_details);
-        Button buttonOk = (Button) findViewById(R.id.confirm_button);
-        Button buttonCancel = (Button) findViewById(R.id.cancel_button);
-        buttonOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText editBookItemName = findViewById(R.id.edittext_item_name);
-                EditText editBookItemPrice = findViewById(R.id.edittext_item_img);
-                // 在需要返回数据的地方创建一个Intent对象
-                Intent returnIntent = new Intent();
-                // 将数据放入Intent中
-                returnIntent.setAction("add");
-                //returnIntent.putExtra("type","add");
-                returnIntent.putExtra("name", editBookItemName.getText().toString());
-                returnIntent.putExtra("imgId", editBookItemPrice.getText().toString());
-                // 设置结果码和返回的Intent对象
-                setResult(RESULT_OK, returnIntent);
-                // 结束当前Activity
-                finish();
+        Button buttonOk = (Button) findViewById(R.id.button_item_details_ok);
+        Button buttonCancel = (Button) findViewById(R.id.button_item_details_cancel);
+        EditText editText = (EditText) findViewById(R.id.edittext_item_name);
+        //获取到与当前活动相关联的 Intent 对象
+        Intent intent = getIntent();
+        if (intent != null) {
+            if (intent.getAction().equals("modify")) {
+                //如果是修改，需要获取到item的title值放入编辑框
+                editText.setText(intent.getStringExtra("title"));
             }
-        });
-
-        // 设置取消按钮的点击事件
-        buttonCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 关闭当前Activity
-                finish();
-            }
-        });
+            buttonOk.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 将数据放入Intent中
+                    intent.putExtra("title", editText.getText().toString());
+                    // 设置结果码和返回的Intent对象
+                    setResult(Activity.RESULT_OK, intent);
+                    // 结束当前Activity
+                    finish();
+                }
+            });
+            buttonCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // 点击cancel直接结束当前Activity
+                    finish();
+                }
+            });
+        }
     }
 }

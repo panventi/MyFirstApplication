@@ -1,8 +1,18 @@
 package com.jnu.student.data;
 
-public class Book {
-    private final String title;
-    private final int coverResourceId;
+import java.io.Serializable;
+
+public class Book implements Serializable {
+    private String title;
+    private int coverResourceId;
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setCoverResourceId(int coverResourceId) {
+        this.coverResourceId = coverResourceId;
+    }
 
     public Book(String title, int coverResourceId) {
         this.title = title;
