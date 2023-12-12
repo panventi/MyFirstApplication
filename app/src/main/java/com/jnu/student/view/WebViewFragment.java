@@ -1,4 +1,4 @@
-package com.jnu.student;
+package com.jnu.student.view;
 
 import android.os.Bundle;
 
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import com.jnu.student.R;
 
 
 public class WebViewFragment extends Fragment {

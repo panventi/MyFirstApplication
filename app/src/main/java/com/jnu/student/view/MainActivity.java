@@ -1,4 +1,4 @@
-package com.jnu.student;
+package com.jnu.student.view;
 
 
 import androidx.annotation.NonNull;
@@ -13,10 +13,11 @@ import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.jnu.student.R;
 
 
 public class MainActivity extends AppCompatActivity {
-    private String[] tabHeaderStrings = {"图书","地图","新闻"};
+    private String[] tabHeaderStrings = {"图书","地图","新闻","时钟"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public class FragmentAdapter extends FragmentStateAdapter {
-        private static final int NUM_TABS = 3;
+        private static final int NUM_TABS = 4;
         public FragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
             super(fragmentManager, lifecycle);
         }
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
                     return new BaiduMapFragment();
                 case 2:
                     return new WebViewFragment();
+                case 3:
+                    return new CustomClockFragment();
                 default:
                     return null;
             }

@@ -32,8 +32,6 @@ public class ShopDownLoader {
                 reader.close();
                 connection.disconnect();
                 return responseData;
-            }else{
-
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -48,7 +46,6 @@ public class ShopDownLoader {
             JSONObject jsonObject = new JSONObject(content);
             JSONArray jsonDatas = jsonObject.getJSONArray("shops");
             int length = jsonDatas.length();
-            String test;
             for (int i = 0; i < length; i++) {
                 JSONObject shopJson = jsonDatas.getJSONObject(i);
                 ShopLocation shopLocation = new ShopLocation();

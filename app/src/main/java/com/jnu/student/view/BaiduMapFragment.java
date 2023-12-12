@@ -1,4 +1,4 @@
-package com.jnu.student;
+package com.jnu.student.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.jnu.student.R;
 import com.tencent.tencentmap.mapsdk.maps.CameraUpdateFactory;
 import com.tencent.tencentmap.mapsdk.maps.MapView;
 import com.tencent.tencentmap.mapsdk.maps.TencentMap;
@@ -23,7 +24,6 @@ import com.jnu.student.data.ShopDownLoader;
 
 public class BaiduMapFragment extends Fragment {
     private MapView mapView;
-    private TencentMap tencentMap;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,26 +35,20 @@ public class BaiduMapFragment extends Fragment {
         LatLng point1 = new LatLng(22.255453, 113.54145);
         tencentMap.moveCamera(CameraUpdateFactory.newLatLng(point1));
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String responseData=new ShopDownLoader().download("http://file.nidama.net/class/mobile_develop/data/bookstore2023.json");
-                ArrayList<ShopLocation> shopLocationLocations = new ShopDownLoader().parseJsonObjects(responseData);
-                requireActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        TencentMap tencentMap = mapView.getMap();
-                        for (ShopLocation shopLocation : shopLocationLocations) {
-                            LatLng point1 = new LatLng(shopLocation.getLatitude(), shopLocation.getLongitude());
-                            MarkerOptions markerOptions = new MarkerOptions(point1)
-                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker2))
-                                    .title(shopLocation.getName());
-                            Marker marker = tencentMap.addMarker(markerOptions);
-                            marker.showInfoWindow(); // 显示标记的信息窗口
-                        }
-                    }
-                });
-            }
+        new Thread(() -> {
+            String responseData=new ShopDownLoader().download("http://file.nidama.net/class/mobile_develop/data/bookstore2023.json");
+            ArrayList<ShopLocation> shopLocationLocations = new ShopDownLoader().parseJsonObjects(responseData);
+            requireActivity().runOnUiThread(() -> {
+                TencentMap tencentMap1 = mapView.getMap();
+                for (ShopLocation shopLocation : shopLocationLocations) {
+                    LatLng point11 = new LatLng(shopLocation.getLatitude(), shopLocation.getLongitude());
+                    MarkerOptions markerOptions = new MarkerOptions(point11)
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker2))
+                            .title(shopLocation.getName());
+                    Marker marker = tencentMap1.addMarker(markerOptions);
+                    marker.showInfoWindow(); // 显示标记的信息窗口
+                }
+            });
         }).start();
         return view;
     }
@@ -62,11 +56,7 @@ public class BaiduMapFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(getArguments()!=null){
-
-        }
     }
-
 
     @Override
     public void onResume() {

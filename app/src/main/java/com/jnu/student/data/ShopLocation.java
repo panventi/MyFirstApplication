@@ -15,9 +15,6 @@ public class ShopLocation {
     public void setMemo(String memo) {
         this.memo = memo;
     }
-    public String getMemo() {
-        return memo;
-    }
     public void setName(String name) {
         this.name = name;
     }

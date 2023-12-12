@@ -1,4 +1,4 @@
-package com.jnu.student;
+package com.jnu.student.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.jnu.student.R;
 
 public class BookDetailsActivity extends AppCompatActivity {
     @Override

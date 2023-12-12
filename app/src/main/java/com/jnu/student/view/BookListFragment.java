@@ -1,4 +1,4 @@
-package com.jnu.student;
+package com.jnu.student.view;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,8 +20,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jnu.student.R;
 import com.jnu.student.data.Book;
 import com.jnu.student.data.DataBank;
+import com.jnu.student.view.BookDetailsActivity;
 
 import java.util.ArrayList;
 
