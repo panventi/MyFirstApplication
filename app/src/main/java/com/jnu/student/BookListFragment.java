@@ -122,7 +122,7 @@ public class BookListFragment extends Fragment {
                 intent.setAction("modify");
                 Book bookItem = bookItems.get(bookAdapter.position);
                 intent.putExtra("title",bookItem.getTitle());
-                launcher.launch(intent);
+                launcher.launch(intent);     //调用launch方法启动另一个修改activity
                 break;
             default:
                 return super.onContextItemSelected(item);
@@ -202,16 +202,6 @@ public class BookListFragment extends Fragment {
         public int getItemCount() {
             return localDataSet.size();
         }
-    }
-    public BookListFragment() {
-        // Required empty public constructor
-    }
-
-    public static BookListFragment newInstance(String param1, String param2) {
-        BookListFragment fragment = new BookListFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override

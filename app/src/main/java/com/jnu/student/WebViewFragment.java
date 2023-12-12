@@ -27,18 +27,6 @@ public class WebViewFragment extends Fragment {
         // Inflate the layout for this fragment
         return rootView;
     }
-    public WebViewFragment() {
-        // Required empty public constructor
-    }
-
-
-    // TODO: Rename and change types and number of parameters
-    public static WebViewFragment newInstance(String param1, String param2) {
-        WebViewFragment fragment = new WebViewFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -23,6 +23,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyFirstApplication"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
             android:name=".BookDetailsActivity"
@@ -38,7 +39,7 @@
         </activity>
         <meta-data
             android:name="TencentMapSDK"
-            android:value="PEEBZ-2SS3L-6JVPV-M7C4P-3GY2E-XAFNY" />
+            android:value="YGOBZ-V7ICW-3WQRZ-36YPD-5DMMS-ZUF5G" />
     </application>
 
 </manifest>
