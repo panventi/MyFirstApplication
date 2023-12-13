@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.jnu.student.view.ClockView
+    <com.jnu.student.view.CustomClockView
         android:id="@+id/clock_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

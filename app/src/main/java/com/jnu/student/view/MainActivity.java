@@ -17,7 +17,7 @@ import com.jnu.student.R;
 
 
 public class MainActivity extends AppCompatActivity {
-    private String[] tabHeaderStrings = {"图书","地图","新闻","时钟"};
+    private String[] tabHeaderStrings = {"图书","地图","新闻","时钟","游戏"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public class FragmentAdapter extends FragmentStateAdapter {
-        private static final int NUM_TABS = 4;
+        private static final int NUM_TABS = 5;
         public FragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
             super(fragmentManager, lifecycle);
         }
@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
                     return new WebViewFragment();
                 case 3:
                     return new CustomClockFragment();
+                case 4:
+                    return new GameViewFragment();
                 default:
                     return null;
             }

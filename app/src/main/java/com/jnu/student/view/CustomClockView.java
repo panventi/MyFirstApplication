@@ -13,30 +13,26 @@ import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class ClockView extends View {
+public class CustomClockView extends View {
     private Paint circlePaint;
     private Paint hourHandPaint;
     private Paint minuteHandPaint;
     private Paint secondHandPaint;
-    private int viewWidth;
-    private int viewHeight;
     private int centerX;
     private int centerY;
     private int radius;
 
-    private Timer timer;
-
-    public ClockView(Context context) {
+    public CustomClockView(Context context) {
         super(context);
         init();
     }
 
-    public ClockView(Context context, @Nullable AttributeSet attrs) {
+    public CustomClockView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public ClockView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public CustomClockView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
@@ -64,7 +60,7 @@ public class ClockView extends View {
         secondHandPaint.setStrokeWidth(3);
 
         // 创建定时器
-        timer = new Timer();
+        Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -93,36 +89,33 @@ public class ClockView extends View {
                 float secondY = (float) (centerY - secondHandLength * Math.cos(secondAngle));
 
                 // 在UI线程中绘制指针位置
-                post(new Runnable() {
-                    @Override
-                    public void run() {
-                        // 清空画布
-                        invalidate();
+                post(() -> {
+                    // 清空画布
+                    invalidate();
 
-                        // 绘制外圆
-                        Canvas canvas = new Canvas();
-                        canvas.drawColor(Color.WHITE);
-                        canvas.drawCircle(centerX, centerY, radius, circlePaint);
+                    // 绘制外圆
+                    Canvas canvas = new Canvas();
+                    canvas.drawColor(Color.WHITE);
+                    canvas.drawCircle(centerX, centerY, radius, circlePaint);
 
-                        // 绘制刻度线
-                        for (int i = 0; i < 12; i++) {
-                            float angle = (float) (i * Math.PI / 6);
-                            float startX = (float) (centerX + (radius - 40) * Math.sin(angle));
-                            float startY = (float) (centerY - (radius - 40) * Math.cos(angle));
-                            float endX = (float) (centerX + radius * Math.sin(angle));
-                            float endY = (float) (centerY - radius * Math.cos(angle));
-                            canvas.drawLine(startX, startY, endX, endY, circlePaint);
-                        }
-
-                        // 绘制时针
-                        canvas.drawLine(centerX, centerY, hourX, hourY, hourHandPaint);
-
-                        // 绘制分针
-                        canvas.drawLine(centerX, centerY, minuteX, minuteY, minuteHandPaint);
-
-                        // 绘制秒针
-                        canvas.drawLine(centerX, centerY, secondX, secondY, secondHandPaint);
+                    // 绘制刻度线
+                    for (int i = 0; i < 12; i++) {
+                        float angle = (float) (i * Math.PI / 6);
+                        float startX = (float) (centerX + (radius - 40) * Math.sin(angle));
+                        float startY = (float) (centerY - (radius - 40) * Math.cos(angle));
+                        float endX = (float) (centerX + radius * Math.sin(angle));
+                        float endY = (float) (centerY - radius * Math.cos(angle));
+                        canvas.drawLine(startX, startY, endX, endY, circlePaint);
                     }
+
+                    // 绘制时针
+                    canvas.drawLine(centerX, centerY, hourX, hourY, hourHandPaint);
+
+                    // 绘制分针
+                    canvas.drawLine(centerX, centerY, minuteX, minuteY, minuteHandPaint);
+
+                    // 绘制秒针
+                    canvas.drawLine(centerX, centerY, secondX, secondY, secondHandPaint);
                 });
             }
         }, 0, 1000);
@@ -131,11 +124,9 @@ public class ClockView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        viewWidth = w;
-        viewHeight = h;
-        centerX = viewWidth / 2;
-        centerY = viewHeight / 2;
-        radius = Math.min(viewWidth, viewHeight) / 2 - 20;
+        centerX = w / 2;
+        centerY = h / 2;
+        radius = Math.min(w, h) / 2 - 20;
     }
 
     @Override
