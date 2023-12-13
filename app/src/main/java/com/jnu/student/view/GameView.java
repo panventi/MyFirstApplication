@@ -11,8 +11,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import java.util.Random;
 
-
-
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private GameThread gameThread;
     private int screenWidth, screenHeight;
